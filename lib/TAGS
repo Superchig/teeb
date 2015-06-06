@@ -1,0 +1,41 @@
+
+mob.rb,1283
+class MobMob1,0
+  attr_accessor :name, :description, :health, :max_health, :magic, :max_magicname2,0
+  attr_accessor :name, :description, :health, :max_health, :magic, :max_magicname=2,0
+  attr_accessor :name, :description, :health, :max_health, :magic, :max_magicdescription2,0
+  attr_accessor :name, :description, :health, :max_health, :magic, :max_magicdescription=2,0
+  attr_accessor :name, :description, :health, :max_health, :magic, :max_magichealth2,0
+  attr_accessor :name, :description, :health, :max_health, :magic, :max_magichealth=2,0
+  attr_accessor :name, :description, :health, :max_health, :magic, :max_magicmax_health2,0
+  attr_accessor :name, :description, :health, :max_health, :magic, :max_magicmax_health=2,0
+  attr_accessor :name, :description, :health, :max_health, :magic, :max_magicmagic2,0
+  attr_accessor :name, :description, :health, :max_health, :magic, :max_magicmagic=2,0
+  attr_accessor :name, :description, :health, :max_health, :magic, :max_magicmax_magic2,0
+  attr_accessor :name, :description, :health, :max_health, :magic, :max_magicmax_magic=2,0
+  def initialize(name=@default_name, description=@default_description, health=@default_health, \initialize11,0
+  def attack(target)attack21,0
+  def move(room)move25,0
+
+map.rb,209
+class MapMap1,0
+  attr_accessor :start, :nextstart2,0
+  attr_accessor :start, :nextstart=2,0
+  attr_accessor :start, :nextnext2,0
+  attr_accessor :start, :nextnext=2,0
+  def move(mob, room)move4,0
+
+room.rb,767
+class RoomRoom1,0
+  attr_accessor :north, :south, :east, :west, :mobsnorth2,0
+  attr_accessor :north, :south, :east, :west, :mobsnorth=2,0
+  attr_accessor :north, :south, :east, :west, :mobssouth2,0
+  attr_accessor :north, :south, :east, :west, :mobssouth=2,0
+  attr_accessor :north, :south, :east, :west, :mobseast2,0
+  attr_accessor :north, :south, :east, :west, :mobseast=2,0
+  attr_accessor :north, :south, :east, :west, :mobswest2,0
+  attr_accessor :north, :south, :east, :west, :mobswest=2,0
+  attr_accessor :north, :south, :east, :west, :mobsmobs2,0
+  attr_accessor :north, :south, :east, :west, :mobsmobs=2,0
+  def initialize(north=nil, south=nil, east=nil, west=nil, mobs=nil)initialize4,0
+  def init_mobs(*input_mobs)init_mobs13,0
