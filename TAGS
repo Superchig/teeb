@@ -1,0 +1,57 @@
+
+test/mob_test.rb,228
+class TestMeme < Minitest::TestTestMeme4,0
+  def setupsetup5,0
+  def test_name_and_descriptiontest_name_and_description13,0
+  def test_mob_healthtest_mob_health18,0
+  def test_mob_magic_pointstest_mob_magic_points27,0
+
+test/map_test.rb,200
+class TestMap < Minitest::TestTestMap6,0
+  def setupsetup7,0
+  def test_mobs_in_roomstest_mobs_in_rooms23,0
+  def test_remove_mobstest_remove_mobs35,0
+  def test_move_mobstest_move_mobs41,0
+
+lib/mobs/mob.rb,1822
+class MobMob1,0
+  attr_accessor :name, :description, :health, :max_health, :magic_points, :max_magic_points, :roomname2,0
+  attr_accessor :name, :description, :health, :max_health, :magic_points, :max_magic_points, :roomname=2,0
+  attr_accessor :name, :description, :health, :max_health, :magic_points, :max_magic_points, :roomdescription2,0
+  attr_accessor :name, :description, :health, :max_health, :magic_points, :max_magic_points, :roomdescription=2,0
+  attr_accessor :name, :description, :health, :max_health, :magic_points, :max_magic_points, :roomhealth2,0
+  attr_accessor :name, :description, :health, :max_health, :magic_points, :max_magic_points, :roomhealth=2,0
+  attr_accessor :name, :description, :health, :max_health, :magic_points, :max_magic_points, :roommax_health2,0
+  attr_accessor :name, :description, :health, :max_health, :magic_points, :max_magic_points, :roommax_health=2,0
+  attr_accessor :name, :description, :health, :max_health, :magic_points, :max_magic_points, :roommagic_points2,0
+  attr_accessor :name, :description, :health, :max_health, :magic_points, :max_magic_points, :roommagic_points=2,0
+  attr_accessor :name, :description, :health, :max_health, :magic_points, :max_magic_points, :roommax_magic_points2,0
+  attr_accessor :name, :description, :health, :max_health, :magic_points, :max_magic_points, :roommax_magic_points=2,0
+  attr_accessor :name, :description, :health, :max_health, :magic_points, :max_magic_points, :roomroom2,0
+  attr_accessor :name, :description, :health, :max_health, :magic_points, :max_magic_points, :roomroom=2,0
+  def initialize(name = "Default Mob Name", description = "This is the default mob description.", health = 100, \initialize7,0
+  def attack(target)attack18,0
+  def move(next_room)move22,0
+  def to_sto_s28,0
+
+lib/mobs/player.rb,30
+class Player < MobPlayer3,0
+
+lib/map/room.rb,1171
+class RoomRoom1,0
+  attr_accessor :north, :south, :east, :west, :name, :descriptionnorth2,0
+  attr_accessor :north, :south, :east, :west, :name, :descriptionnorth=2,0
+  attr_accessor :north, :south, :east, :west, :name, :descriptionsouth2,0
+  attr_accessor :north, :south, :east, :west, :name, :descriptionsouth=2,0
+  attr_accessor :north, :south, :east, :west, :name, :descriptioneast2,0
+  attr_accessor :north, :south, :east, :west, :name, :descriptioneast=2,0
+  attr_accessor :north, :south, :east, :west, :name, :descriptionwest2,0
+  attr_accessor :north, :south, :east, :west, :name, :descriptionwest=2,0
+  attr_accessor :north, :south, :east, :west, :name, :descriptionname2,0
+  attr_accessor :north, :south, :east, :west, :name, :descriptionname=2,0
+  attr_accessor :north, :south, :east, :west, :name, :descriptiondescription2,0
+  attr_accessor :north, :south, :east, :west, :name, :descriptiondescription=2,0
+  attr_reader :mobsmobs3,0
+  def initialize(name = "Default Room", description = "This is the default room description", \initialize5,0
+  def add_mob(*mobs)add_mob16,0
+  def remove_mob(*mobs_for_deletion)remove_mob24,0

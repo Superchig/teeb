@@ -19,6 +19,12 @@ class Mob
     # stub
   end
 
+  def move(next_room)
+    @room.remove_mob(self) unless room.nil?
+    next_room.add_mob(self)
+    @room = next_room
+  end
+
   def to_s
     "Mob: #{@name}; health: #{@health}; magic: #{@magic_points}"
   end

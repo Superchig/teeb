@@ -12,6 +12,7 @@ GEM
       pry (~> 0.9)
       yard (~> 0.8)
     rake (10.4.2)
+    require_all (1.3.2)
     slop (3.6.0)
     yard (0.8.7.6)
 
@@ -23,6 +24,7 @@ DEPENDENCIES
   pry
   pry-doc
   rake
+  require_all
 
 BUNDLED WITH
    1.10.3

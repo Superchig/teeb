@@ -1,7 +1,0 @@
-
-mob_test.rb,228
-class TestMeme < Minitest::TestTestMeme4,0
-  def setupsetup5,0
-  def test_name_and_descriptiontest_name_and_description13,0
-  def test_mob_healthtest_mob_health18,0
-  def test_mob_magic_pointstest_mob_magic_points27,0

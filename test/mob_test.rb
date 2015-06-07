@@ -1,5 +1,7 @@
 require 'minitest/autorun'
-require_relative '../lib/mob.rb'
+require 'require_all'
+require_rel '../lib/mobs'
+require_rel '../lib/map'
 
 class TestMeme < Minitest::Test
   def setup
