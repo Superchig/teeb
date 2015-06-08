@@ -3,6 +3,7 @@ require 'require_all'
 require_rel '../lib/mobs'
 require_rel '../lib/map'
 
+# Tests out the layout, placement, and movement of mobs
 class TestMap < Minitest::Test
   def setup
     # Initialize rooms, map, and mobs
@@ -12,10 +13,11 @@ class TestMap < Minitest::Test
     @default_mob = Mob.new
     @custom_mob = Mob.new(@custom_name, @custom_description, 150, 150, 200, 200)
     @fighter = Mob.new("Fighting Joe", "Some sort of brawling type.", 250, 250, 100, 100)
-    @outside, @bar = Room.new, Room.new
+    @outside = Room.new
+    @bar = Room.new
 
-    @outside.south = @bar
-    @bar.north = @outside
+    @outside.paths[:south] = @bar
+    @bar.paths[:north] = @outside
     @bar.add_mob(@fighter, @default_mob, @custom_mob)
   end
 

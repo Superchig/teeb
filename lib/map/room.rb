@@ -1,16 +1,16 @@
+# A Room holds references to the rooms surrounding it,
+# and has an array, mobs, which holds references to the
+# mobs in the room.
 class Room
   attr_accessor :north, :south, :east, :west, :name, :description
-  attr_reader :mobs
+  attr_reader :mobs, :paths
 
   def initialize(name = "Default Room", description = "This is the default room description", \
-                 north = nil, south = nil, east = nil, west = nil, mobs = [])
+                 mobs = [], paths = {})
     @name = name
     @description = description
-    @north = north
-    @south = south
-    @east = east
-    @west = west
     @mobs = mobs
+    @paths = paths
   end
 
   def add_mob(*mobs)

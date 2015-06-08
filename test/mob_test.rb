@@ -3,7 +3,9 @@ require 'require_all'
 require_rel '../lib/mobs'
 require_rel '../lib/map'
 
-class TestMeme < Minitest::Test
+# Tests the stats and skills of mobs
+# Placement and movement is in map_test.rb
+class TestMob < Minitest::Test
   def setup
     @custom_name = "Custom Mob 1"
     @custom_description = "Custom made! Bit of a wizard."
@@ -23,7 +25,6 @@ class TestMeme < Minitest::Test
 
     assert_equal 100, @default_mob.max_health
     assert_equal 150, @custom_mob.max_health
-
   end
 
   def test_mob_magic_points
