@@ -28,7 +28,7 @@ module Menu
   end
 
   def eval_adventures(choice)
-    case(choice)
+    case choice
     when '1'
       load_rel '../../maps/teeb_map/teeb_map.rb'
     when '2'

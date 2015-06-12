@@ -33,22 +33,9 @@ module Movement
     room.mobs.nil? ? (puts unseen_message) : show_mobs(room.mobs)
   end
 
-  def check_move(mob, direction)
-    case direction
-    when :north
-      !player.room.north.nil?
-    when :south
-      !player.room.south.nil?
-    when :east
-      !player.room.east.nil? 
-    when :west
-      !player.room.west.nil?
-    end
-  end
-
   def eval_move(mob, direction)
     sym_direction = direction.to_sym
-    should_move = check_move(mob, sym_direction)
+    should_move = !mob.room[sym_direction].nil?
 
     should_move ? mob.move(mob.room.paths[sym_direction]) : (puts "You cannot move there.")
   end
