@@ -1,17 +1,19 @@
-require_rel '../map'
-require_rel '../mobs'
+# require_rel '../map'
+# require_rel '../mobs'
 
 # Add a method of changing a string to a direction
 class String
   def to_direction
-    is_north = self.downcase == "north"
-    is_south = self.downcase == "south"
-    is_east = self.downcase == "east"
-    is_west = self.downcase == "west"
-
-    nil unless is_north || is_south || is_east || is_west
-
-    self.to_sym
+    case self
+    when 'north', 'n'
+      :north
+    when 'south', 's'
+      :south
+    when 'east', 's'
+      :east
+    when 'west', 'w'
+      :west
+    end
   end
 end
 
@@ -33,10 +35,19 @@ module Movement
     room.mobs.nil? ? (puts unseen_message) : show_mobs(room.mobs)
   end
 
-  def eval_move(mob, direction)
-    sym_direction = direction.to_sym
-    should_move = !mob.room[sym_direction].nil?
+  def move_with_look(player, sym_direction)
+    player.move(player.room.paths[sym_direction])
+    show_room(player.room)
+  end
 
-    should_move ? mob.move(mob.room.paths[sym_direction]) : (puts "You cannot move there.")
+  def eval_move(direction, player)
+    show_room(player.room)
+
+    sym_direction = direction.to_direction
+    puts "\nsym_direction is #{sym_direction}\n"
+    should_move = !player.room.paths[sym_direction].nil?
+
+    should_move ? move_with_look(player, sym_direction) : (puts "You cannot move there.")
+    should_move
   end
 end

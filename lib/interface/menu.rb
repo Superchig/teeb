@@ -66,18 +66,32 @@ module Menu
     end
   end
 
+  def eval_com(choice, player)
+    moved = Movement.eval_move(choice, player)
+
+    puts "#{choice} is not a valid command." unless moved
+  end
+
+  def prompt(player)
+    print "> "
+
+    choice = $stdin.gets.chomp
+    eval_com(choice, player)
+  end
+
   def start_prompt
     welcome_message
 
     start_loop
   end
 
-  def prompt
-    Movement.show_room
+  def gen_loop(player)
+    Movement.show_room(player.room)
 
-    print "> "
-
-    choice = $stdin.gets.chomp
-    Movement.eval_move(choice)
+    loop do
+      prompt(player)
+    end
   end
+
+  public :start_prompt, :gen_loop
 end
