@@ -34,8 +34,9 @@ class MobMob3,0
   def move(next_room)move24,0
   def to_sto_s30,0
 
-lib/mobs/player.rb,30
-class Player < MobPlayer5,0
+lib/mobs/player.rb,61
+class Player < MobPlayer6,0
+  def move(next_room)move7,0
 
 lib/map/room.rb,1217
 class RoomRoom4,0
@@ -57,13 +58,14 @@ class RoomRoom4,0
   def add_mob(*mobs)add_mob16,0
   def remove_mob(*mobs_for_deletion)remove_mob24,0
 
-lib/interface/movement.rb,211
+lib/interface/movement.rb,278
 class StringString5,0
   def to_directionto_direction6,0
 module MovementMovement21,0
   def show_mobs(mobs)show_mobs24,0
   def show_room(room)show_room30,0
-  def eval_move(direction, mob)eval_move38,0
+  def move_with_look(player, sym_direction)move_with_look38,0
+  def eval_move(direction, player)eval_move43,0
 
 lib/interface/menu.rb,412
 module MenuMenu5,0

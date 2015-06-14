@@ -41,13 +41,10 @@ module Movement
   end
 
   def eval_move(direction, player)
-    show_room(player.room)
-
     sym_direction = direction.to_direction
-    puts "\nsym_direction is #{sym_direction}\n"
     should_move = !player.room.paths[sym_direction].nil?
 
-    should_move ? move_with_look(player, sym_direction) : (puts "You cannot move there.")
+    move_with_look(player, sym_direction) if should_move
     should_move
   end
 end

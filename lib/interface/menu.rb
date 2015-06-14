@@ -69,14 +69,19 @@ module Menu
   def eval_com(choice, player)
     moved = Movement.eval_move(choice, player)
 
-    puts "#{choice} is not a valid command." unless moved
+    case choice
+    when 'l' || 'look'
+      Movement.show_room(player.room)
+    else
+      puts "#{choice} is not a valid command"
+    end unless moved # Don't run the case statement if the player moved
   end
 
   def prompt(player)
     print "> "
 
     choice = $stdin.gets.chomp
-    eval_com(choice, player)
+    eval_com(choice.downcase, player)
   end
 
   def start_prompt
