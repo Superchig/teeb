@@ -70,8 +70,11 @@ module Menu
     moved = Movement.eval_move(choice, player)
 
     case choice
-    when 'l' || 'look'
-      Movement.show_room(player.room)
+    when /^look/ || /^l/
+      temp = choice.dup
+      temp.slice!(/^look/)
+      look_evaluation_str = temp
+      player.eval_look(look_evaluation_str)
     else
       puts "#{choice} is not a valid command"
     end unless moved # Don't run the case statement if the player moved

@@ -34,29 +34,22 @@ class MobMob3,0
   def move(next_room)move24,0
   def to_sto_s30,0
 
-lib/mobs/player.rb,61
+lib/mobs/player.rb,97
 class Player < MobPlayer6,0
-  def move(next_room)move7,0
+  def eval_lookeval_look7,0
+  def look_at(lookable)look_at11,0
 
-lib/map/room.rb,1217
-class RoomRoom4,0
-  attr_accessor :north, :south, :east, :west, :name, :descriptionnorth5,0
-  attr_accessor :north, :south, :east, :west, :name, :descriptionnorth=5,0
-  attr_accessor :north, :south, :east, :west, :name, :descriptionsouth5,0
-  attr_accessor :north, :south, :east, :west, :name, :descriptionsouth=5,0
-  attr_accessor :north, :south, :east, :west, :name, :descriptioneast5,0
-  attr_accessor :north, :south, :east, :west, :name, :descriptioneast=5,0
-  attr_accessor :north, :south, :east, :west, :name, :descriptionwest5,0
-  attr_accessor :north, :south, :east, :west, :name, :descriptionwest=5,0
-  attr_accessor :north, :south, :east, :west, :name, :descriptionname5,0
-  attr_accessor :north, :south, :east, :west, :name, :descriptionname=5,0
-  attr_accessor :north, :south, :east, :west, :name, :descriptiondescription5,0
-  attr_accessor :north, :south, :east, :west, :name, :descriptiondescription=5,0
-  attr_reader :mobs, :pathsmobs6,0
-  attr_reader :mobs, :pathspaths6,0
-  def initialize(name = "Default Room", description = "This is the default room description", \initialize8,0
-  def add_mob(*mobs)add_mob16,0
-  def remove_mob(*mobs_for_deletion)remove_mob24,0
+lib/map/room.rb,492
+class RoomRoom6,0
+  attr_accessor :name, :descriptionname9,0
+  attr_accessor :name, :descriptionname=9,0
+  attr_accessor :name, :descriptiondescription9,0
+  attr_accessor :name, :descriptiondescription=9,0
+  attr_reader :mobs, :pathsmobs10,0
+  attr_reader :mobs, :pathspaths10,0
+  def initialize(name = "Default Room", description = "This is the default room description", \initialize12,0
+  def add_mob(*mobs)add_mob20,0
+  def remove_mob(*mobs_for_deletion)remove_mob28,0
 
 lib/interface/movement.rb,278
 class StringString5,0
@@ -76,6 +69,10 @@ module MenuMenu5,0
   def eval_choice(choice)eval_choice39,0
   def start_loopstart_loop53,0
   def eval_com(choice, player)eval_com69,0
-  def prompt(player)prompt75,0
-  def start_promptstart_prompt82,0
-  def gen_loop(player)gen_loop88,0
+  def prompt(player)prompt83,0
+  def start_promptstart_prompt90,0
+  def gen_loop(player)gen_loop96,0
+
+lib/mixins/lookable.rb,49
+module LookableLookable2,0
+  def showshow3,0

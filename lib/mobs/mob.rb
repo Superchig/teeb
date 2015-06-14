@@ -1,6 +1,10 @@
+require_rel "../mixins/lookable.rb"
+
 # Everything that moves, though mostly npcs
 # and the player
 class Mob
+  include Lookable
+
   attr_accessor :name, :description, :health, :max_health, :magic_points, :max_magic_points, :room
 
   # Basically, room is a tracker of what room the mob is in

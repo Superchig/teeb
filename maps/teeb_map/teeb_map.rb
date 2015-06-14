@@ -16,7 +16,8 @@ Average-size for a dwarf.
 He has some chainmail armor, and a greataxe in his hands.
 He looks passive.
 EOT
-player = Mob.new("Player Character", "The player.", 150, 150, 150, 150)
+
+player = Player.new("Player Character", "The player.", 150, 150, 150, 150)
 dwarf = Mob.new("Dwarf", dwarf_description, 200, 200, 100, 100)
 
 # Rooms setup
