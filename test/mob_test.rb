@@ -10,8 +10,17 @@ class TestMob < Minitest::Test
     @custom_name = "Custom Mob 1"
     @custom_description = "Custom made! Bit of a wizard."
 
+    # Mobs setup
     @default_mob = Mob.new
     @custom_mob = Mob.new(@custom_name, @custom_description, 150, 150, 200, 200)
+
+    # Items setup
+    fork = Item.new("Odd Fork", <<-DESC
+An unusually peculiar fork.
+It has no abnormal traits, however.
+DESC
+)
+    @default_mob.add_item(fork)
   end
 
   def test_name_and_description
