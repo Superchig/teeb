@@ -2,9 +2,9 @@
 test/mob_test.rb,226
 class TestMob < Minitest::TestTestMob8,0
   def setupsetup9,0
-  def test_name_and_descriptiontest_name_and_description17,0
-  def test_mob_healthtest_mob_health22,0
-  def test_mob_magic_pointstest_mob_magic_points30,0
+  def test_name_and_descriptiontest_name_and_description26,0
+  def test_mob_healthtest_mob_health31,0
+  def test_mob_magic_pointstest_mob_magic_points39,0
 
 test/map_test.rb,200
 class TestMap < Minitest::TestTestMap7,0
@@ -13,52 +13,61 @@ class TestMap < Minitest::TestTestMap7,0
   def test_remove_mobstest_remove_mobs36,0
   def test_move_mobstest_move_mobs42,0
 
-lib/mobs/mob.rb,1823
-class MobMob3,0
-  attr_accessor :name, :description, :health, :max_health, :magic_points, :max_magic_points, :roomname4,0
-  attr_accessor :name, :description, :health, :max_health, :magic_points, :max_magic_points, :roomname=4,0
-  attr_accessor :name, :description, :health, :max_health, :magic_points, :max_magic_points, :roomdescription4,0
-  attr_accessor :name, :description, :health, :max_health, :magic_points, :max_magic_points, :roomdescription=4,0
-  attr_accessor :name, :description, :health, :max_health, :magic_points, :max_magic_points, :roomhealth4,0
-  attr_accessor :name, :description, :health, :max_health, :magic_points, :max_magic_points, :roomhealth=4,0
-  attr_accessor :name, :description, :health, :max_health, :magic_points, :max_magic_points, :roommax_health4,0
-  attr_accessor :name, :description, :health, :max_health, :magic_points, :max_magic_points, :roommax_health=4,0
-  attr_accessor :name, :description, :health, :max_health, :magic_points, :max_magic_points, :roommagic_points4,0
-  attr_accessor :name, :description, :health, :max_health, :magic_points, :max_magic_points, :roommagic_points=4,0
-  attr_accessor :name, :description, :health, :max_health, :magic_points, :max_magic_points, :roommax_magic_points4,0
-  attr_accessor :name, :description, :health, :max_health, :magic_points, :max_magic_points, :roommax_magic_points=4,0
-  attr_accessor :name, :description, :health, :max_health, :magic_points, :max_magic_points, :roomroom4,0
-  attr_accessor :name, :description, :health, :max_health, :magic_points, :max_magic_points, :roomroom=4,0
-  def initialize(name = "Default Mob Name", description = "This is the default mob description.", health = 100, \initialize9,0
-  def attack(_target)attack20,0
-  def move(next_room)move24,0
-  def to_sto_s30,0
+lib/items/item.rb,272
+class ItemItem6,0
+  attr_accessor :name, :descriptionname8,0
+  attr_accessor :name, :descriptionname=8,0
+  attr_accessor :name, :descriptiondescription8,0
+  attr_accessor :name, :descriptiondescription=8,0
+  def initialize(name = "Default Item",initialize10,0
 
-lib/mobs/player.rb,97
-class Player < MobPlayer6,0
-  def eval_lookeval_look7,0
-  def look_at(lookable)look_at11,0
+lib/mobs/mob.rb,1194
+class MobMob5,0
+  attr_accessor :name, :description, :health, :max_health,name9,0
+  attr_accessor :name, :description, :health, :max_health,name=9,0
+  attr_accessor :name, :description, :health, :max_health,description9,0
+  attr_accessor :name, :description, :health, :max_health,description=9,0
+  attr_accessor :name, :description, :health, :max_health,health9,0
+  attr_accessor :name, :description, :health, :max_health,health=9,0
+  attr_accessor :name, :description, :health, :max_health,max_health9,0
+  attr_accessor :name, :description, :health, :max_health,max_health=9,0
+  attr_accessor :name, :description, :health, :max_health,magic_points9,0
+  attr_accessor :name, :description, :health, :max_health,magic_points=9,0
+  attr_accessor :name, :description, :health, :max_health,max_magic_points9,0
+  attr_accessor :name, :description, :health, :max_health,max_magic_points=9,0
+  attr_accessor :name, :description, :health, :max_health,room9,0
+  attr_accessor :name, :description, :health, :max_health,room=9,0
+  def initialize(name = "Default Mob Name",initialize15,0
+  def attack(_target)attack30,0
+  def move(next_room)move34,0
+  def to_sto_s40,0
 
-lib/map/room.rb,492
+lib/mobs/player.rb,170
+class Player < MobPlayer5,0
+  def check_for_lookable(lookable_name)check_for_lookable6,0
+  def eval_look(to_look)eval_look13,0
+  def look_at(lookable)look_at22,0
+
+lib/map/room.rb,548
 class RoomRoom6,0
-  attr_accessor :name, :descriptionname9,0
-  attr_accessor :name, :descriptionname=9,0
-  attr_accessor :name, :descriptiondescription9,0
-  attr_accessor :name, :descriptiondescription=9,0
-  attr_reader :mobs, :pathsmobs10,0
-  attr_reader :mobs, :pathspaths10,0
-  def initialize(name = "Default Room", description = "This is the default room description", \initialize12,0
-  def add_mob(*mobs)add_mob20,0
-  def remove_mob(*mobs_for_deletion)remove_mob28,0
+  attr_accessor :name, :descriptionname10,0
+  attr_accessor :name, :descriptionname=10,0
+  attr_accessor :name, :descriptiondescription10,0
+  attr_accessor :name, :descriptiondescription=10,0
+  attr_reader :mobs, :pathsmobs11,0
+  attr_reader :mobs, :pathspaths11,0
+  def initialize(name = "Default Room", description = "This is the default room description", \initialize13,0
+  def add_mob(*mobs)add_mob22,0
+  def remove_mob(*mobs_for_deletion)remove_mob30,0
+  def show_mobsshow_mobs39,0
+  def showshow45,0
 
-lib/interface/movement.rb,278
+lib/interface/movement.rb,204
 class StringString5,0
   def to_directionto_direction6,0
 module MovementMovement21,0
-  def show_mobs(mobs)show_mobs24,0
-  def show_room(room)show_room30,0
-  def move_with_look(player, sym_direction)move_with_look38,0
-  def eval_move(direction, player)eval_move43,0
+  def move_with_look(player, sym_direction)move_with_look24,0
+  def eval_move(direction, player)eval_move29,0
 
 lib/interface/menu.rb,412
 module MenuMenu5,0
@@ -76,3 +85,12 @@ module MenuMenu5,0
 lib/mixins/lookable.rb,49
 module LookableLookable2,0
   def showshow3,0
+
+lib/mixins/inventory.rb,293
+module InventoryInventory2,0
+  attr_accessor :itemsitems3,0
+  attr_accessor :itemsitems=3,0
+  def init_items(*items)init_items5,0
+  def add_item(*items_to_add)add_item9,0
+  def remove_item(*items_to_remove)remove_item13,0
+  def move_item(target_mob, *items_to_move)move_item17,0

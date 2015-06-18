@@ -21,23 +21,9 @@ end
 module Movement
   module_function
 
-  def show_mobs(mobs)
-    mobs.each do |mob|
-      puts "There is a #{mob.name}"
-    end
-  end
-
-  def show_room(room)
-    puts room.description
-
-    unseen_message = "You do not see anyone else here."
-
-    room.mobs.nil? ? (puts unseen_message) : show_mobs(room.mobs)
-  end
-
   def move_with_look(player, sym_direction)
     player.move(player.room.paths[sym_direction])
-    show_room(player.room)
+    player.room.show
   end
 
   def eval_move(direction, player)

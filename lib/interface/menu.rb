@@ -94,7 +94,7 @@ module Menu
   end
 
   def gen_loop(player)
-    Movement.show_room(player.room)
+    player.room.show
 
     loop do
       prompt(player)
