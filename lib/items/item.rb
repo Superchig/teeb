@@ -16,4 +16,12 @@ DESC
     @name = name
     @description = description
   end
+
+  def ==(other_item)
+    @name == other_item.name && @description == other_item.description
+  end
+
+  def to_s
+    "item: #{@name}; description: #{@description}"
+  end
 end

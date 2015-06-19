@@ -2,6 +2,7 @@ require 'minitest/autorun'
 require 'require_all'
 require_rel '../lib/mobs'
 require_rel '../lib/map'
+require_rel '../lib/items'
 
 # Tests the stats and skills of mobs
 # Placement and movement is in map_test.rb
@@ -19,7 +20,7 @@ class TestMob < Minitest::Test
 An unusually peculiar fork.
 It has no abnormal traits, however.
 DESC
-)
+                   )
     @default_mob.add_item(fork)
   end
 

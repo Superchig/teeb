@@ -2,13 +2,18 @@ require_rel '../../lib'
 
 ## Map setup
 
-# Variable declaration
+# Rooms setup
 bar_description = <<-EOT
 It's a bar-ish type of bar. You know, the one that looks like a bar.
 There's a way out up north. Not sure where it leads to, though.
 EOT
 bar = Room.new("Bar-Like Bar", bar_description)
 outside = Room.new
+
+bar.paths[:north] = outside
+outside.paths[:south] = bar
+
+# Mobs setup
 
 dwarf_description = <<-EOT
 A dwarf, as his name should state.
@@ -20,15 +25,17 @@ EOT
 player = Player.new("Player Character", "The player.", 150, 150, 150, 150)
 dwarf = Mob.new("Dwarf", dwarf_description, 200, 200, 100, 100)
 
-# Rooms setup
-bar.paths[:north] = outside
-outside.paths[:south] = bar
+player.room = bar
+dwarf.room = outside
 
 bar.add_mob(player)
 outside.add_mob(dwarf)
 
-# Mobs setup
-player.room = bar
-dwarf.room = outside
+# Items setup
+
+broken_watch = Item.new("Broken Watch", "A peculiar analog wristwatch. It is stuck at the time 4:20.")
+spoon = Item.new("Spoon", "There is no spoon!")
+
+player.room.add_item(broken_watch, spoon)
 
 Menu.gen_loop(player)

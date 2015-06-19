@@ -42,11 +42,22 @@ class Room
     end
   end
 
+  def show_items
+    output = "Room Items: "
+
+    room_items = @items.map { |item| item.name }.join ', '
+
+    output << room_items
+
+    puts output
+  end
+
   def show
     puts @description
 
     unseen_message = "You do not see anyone else here."
 
-    @mobs.nil? ? (puts unseen_message) : show_mobs
+    @mobs.empty? ? (puts unseen_message) : show_mobs
+    show_items unless @items.empty?
   end
 end
