@@ -66,19 +66,29 @@ module Menu
     end
   end
 
+  # rubocop:disable Metrics/CyclomaticComplexity
   def eval_com(choice, player)
     moved = Movement.eval_move(choice, player)
 
+    eval_str = choice.dup
+
     case choice
     when /^look/ || /^l/
-      temp = choice.dup
-      temp.slice!(/^look/)
-      look_evaluation_str = temp
-      player.eval_look(look_evaluation_str)
+      eval_str.slice!(/^look/)
+      player.eval_look(eval_str)
+    when "get gud scrub"
+      puts "What! You found this, huh. Did you look at the source code?"
+      puts "That was a rhetorical question. I'm too lazy to add a prompt and conditionals here."
+    when /^get/
+      eval_str.slice!(/^get /)
+      player.get_item(eval_str, player)
+    when 'i'
+      player.show_items
     else
       puts "#{choice} is not a valid command"
     end unless moved # Don't run the case statement if the player moved
   end
+  # rubocop:enable Metrics/CyclomaticComplexity
 
   def prompt(player)
     print "> "

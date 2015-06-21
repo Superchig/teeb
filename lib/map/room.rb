@@ -45,7 +45,7 @@ class Room
   def show_items
     output = "Room Items: "
 
-    room_items = @items.map { |item| item.name }.join ', '
+    room_items = @items.map(&:name).join ', '
 
     output << room_items
 

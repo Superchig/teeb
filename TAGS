@@ -1,10 +1,17 @@
 
-test/mob_test.rb,226
-class TestMob < Minitest::TestTestMob8,0
-  def setupsetup9,0
-  def test_name_and_descriptiontest_name_and_description26,0
-  def test_mob_healthtest_mob_health31,0
-  def test_mob_magic_pointstest_mob_magic_points39,0
+test/mob_test.rb,227
+class TestMob < Minitest::TestTestMob9,0
+  def setupsetup10,0
+  def test_name_and_descriptiontest_name_and_description27,0
+  def test_mob_healthtest_mob_health32,0
+  def test_mob_magic_pointstest_mob_magic_points40,0
+
+test/item_test.rb,183
+class TestMap < Minitest::TestTestMap9,0
+  def setupsetup10,0
+  def test_ownershiptest_ownership27,0
+  def test_removaltest_removal32,0
+  def test_transfertest_transfer39,0
 
 test/map_test.rb,200
 class TestMap < Minitest::TestTestMap7,0
@@ -13,13 +20,15 @@ class TestMap < Minitest::TestTestMap7,0
   def test_remove_mobstest_remove_mobs36,0
   def test_move_mobstest_move_mobs42,0
 
-lib/items/item.rb,272
+lib/items/item.rb,322
 class ItemItem6,0
   attr_accessor :name, :descriptionname8,0
   attr_accessor :name, :descriptionname=8,0
   attr_accessor :name, :descriptiondescription8,0
   attr_accessor :name, :descriptiondescription=8,0
   def initialize(name = "Default Item",initialize10,0
+  def ==(other_item)==20,0
+  def to_sto_s24,0
 
 lib/mobs/mob.rb,1194
 class MobMob5,0
@@ -42,13 +51,16 @@ class MobMob5,0
   def move(next_room)move34,0
   def to_sto_s40,0
 
-lib/mobs/player.rb,170
+lib/mobs/player.rb,373
 class Player < MobPlayer5,0
-  def check_for_lookable(lookable_name)check_for_lookable6,0
-  def eval_look(to_look)eval_look13,0
-  def look_at(lookable)look_at22,0
+  def show_itemsshow_items6,0
+  def check_for_lookable_name(lookable_name) # Can be refactored to be shorter, though perhaps not as readable.check_for_lookable_name12,0
+  def eval_look(to_look)eval_look32,0
+  def look_at(lookable_name)look_at41,0
+  def eval_get(item_name)eval_get47,0
+  def get_item(item_name, player)get_item55,0
 
-lib/map/room.rb,548
+lib/map/room.rb,581
 class RoomRoom6,0
   attr_accessor :name, :descriptionname10,0
   attr_accessor :name, :descriptionname=10,0
@@ -60,7 +72,8 @@ class RoomRoom6,0
   def add_mob(*mobs)add_mob22,0
   def remove_mob(*mobs_for_deletion)remove_mob30,0
   def show_mobsshow_mobs39,0
-  def showshow45,0
+  def show_itemsshow_items45,0
+  def showshow55,0
 
 lib/interface/movement.rb,204
 class StringString5,0
@@ -69,7 +82,7 @@ module MovementMovement21,0
   def move_with_look(player, sym_direction)move_with_look24,0
   def eval_move(direction, player)eval_move29,0
 
-lib/interface/menu.rb,412
+lib/interface/menu.rb,413
 module MenuMenu5,0
   def creditscredits8,0
   def welcome_messagewelcome_message13,0
@@ -78,19 +91,20 @@ module MenuMenu5,0
   def eval_choice(choice)eval_choice39,0
   def start_loopstart_loop53,0
   def eval_com(choice, player)eval_com69,0
-  def prompt(player)prompt83,0
-  def start_promptstart_prompt90,0
-  def gen_loop(player)gen_loop96,0
+  def prompt(player)prompt91,0
+  def start_promptstart_prompt98,0
+  def gen_loop(player)gen_loop104,0
 
 lib/mixins/lookable.rb,49
 module LookableLookable2,0
   def showshow3,0
 
-lib/mixins/inventory.rb,293
+lib/mixins/inventory.rb,331
 module InventoryInventory2,0
   attr_accessor :itemsitems3,0
   attr_accessor :itemsitems=3,0
-  def init_items(*items)init_items5,0
+  def init_items(items)init_items5,0
   def add_item(*items_to_add)add_item9,0
-  def remove_item(*items_to_remove)remove_item13,0
-  def move_item(target_mob, *items_to_move)move_item17,0
+  def remove_item(*items_to_remove)remove_item16,0
+  def move_item(target_mob, *items_to_move)move_item20,0
+  def has_item?(target)has_item?27,0

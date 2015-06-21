@@ -24,7 +24,9 @@ module Inventory
     end
   end
 
+  # rubocop:disable Style/PredicateName
   def has_item?(target)
     @items.include?(target)
   end
+  # rubocop:enable Style/PredicateName
 end

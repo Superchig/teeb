@@ -27,7 +27,7 @@ Metrics/MethodLength:
 # Offense count: 2
 # Configuration parameters: CountKeywordArgs.
 Metrics/ParameterLists:
-  Max: 7
+  Max: 10
 
 # Offense count: 5
 Style/Documentation:
