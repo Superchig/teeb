@@ -4,8 +4,7 @@ Welcome to a project that I'm using to get a feel for test-driven development an
 ## To-Do
 1. Design Game
 2. Implement items
-   3. Pick up items
-   4. Show items in your inventory
+	3. Wearables
 3. Allow for looking at other rooms
 4. Add doors
 5. Implement stats and/or skills
