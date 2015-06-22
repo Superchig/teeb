@@ -72,8 +72,8 @@ module Menu
     eval_str = choice.dup
 
     case choice
-    when /^look/ || /^l/
-      eval_str.slice!(/^look/)
+    when /^l/
+      eval_str.slice!(/^l/)
       player.eval_look(eval_str)
     when "get gud scrub"
       puts "You found this, huh. Did you look at the source code?"
