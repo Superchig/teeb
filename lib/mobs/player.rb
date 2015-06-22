@@ -108,4 +108,19 @@ class Player < Mob
 
     to_remove ? remove_wearable(to_remove) : (puts "You're not wearing #{wearable_name}")
   end
+
+  def eval_drop(item_name)
+    return puts "USAGE: drop [item]" if item_name.empty? || item_name == "drop"
+
+    to_drop = false
+
+    @items.each { |item| to_drop = item if item.name.downcase == item_name }
+
+    if to_drop
+      drop_item(to_drop)
+      puts "You dropped #{item_name}."
+    else
+      puts "#{item_name} is not in your inventory."
+    end
+  end
 end

@@ -9,7 +9,7 @@ class String
       :north
     when 'south', 's'
       :south
-    when 'east', 's'
+    when 'east', 'e'
       :east
     when 'west', 'w'
       :west

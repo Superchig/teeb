@@ -8,10 +8,56 @@ It's a bar-ish type of bar. You know, the one that looks like a bar.
 There's a way out up north. Not sure where it leads to, though.
 EOT
 bar = Room.new("Bar-Like Bar", bar_description)
-outside = Room.new
 
-bar.paths[:north] = outside
-outside.paths[:south] = bar
+hub_desc = <<DESC
+A hub, leading in all sorts of directions.
+There are paths to the south and the east.
+DESC
+hub = Room.new("Center Hub", hub_desc)
+
+bar.paths[:north] = hub
+hub.paths[:south] = bar
+
+# - Never-ending hallway setup.
+hall_bottom_desc = <<DESC
+A dimly-lit room. Candles are placed somewhat randomly around it.
+There is a continuation to the north, and a path back to the hub to the west.
+Oddly enough, there's also a path to the south. Someone's there.
+DESC
+hall_bot = Room.new("Never-ending Hallway Bottom", hall_bottom_desc)
+
+hall_mid_1_desc = <<DESC
+A fairly bright room. There's actually a lightbulb. Hurray.
+There's a path to the south and the north.
+DESC
+hall_mid_1 = Room.new("Hallway Middle 1", hall_mid_1_desc)
+
+hall_mid_2_desc = <<DESC
+It's really bright in this room. Seriously. You have to squint to retain quality in your retinas.
+There's a path to the south and the north.
+DESC
+hall_mid_2 = Room.new("Hallway Middle 2", hall_mid_2_desc)
+
+hall_end_desc = <<DESC
+This room is almost pitch-black. Huh.
+There are paths to the north and south.
+DESC
+hall_end = Room.new("Hallway End", hall_end_desc)
+
+hub.paths[:east] = hall_bot
+
+hall_bot.paths[:north] = hall_mid_1
+hall_bot.paths[:west] = hub
+hall_bot.paths[:south] = hall_end
+
+hall_mid_1.paths[:north] = hall_mid_2
+hall_mid_1.paths[:south] = hall_bot
+
+hall_mid_2.paths[:north] = hall_end
+hall_mid_2.paths[:south] = hall_mid_1
+
+hall_end.paths[:north] = hall_bot
+hall_end.paths[:south] = hall_mid_2
 
 # Mobs setup
 
@@ -26,10 +72,10 @@ player = Player.new("Player Character", "The player.", 150, 150, 150, 150)
 dwarf = Mob.new("Dwarf", dwarf_description, 200, 200, 100, 100)
 
 player.room = bar
-dwarf.room = outside
+dwarf.room = hub
 
 bar.add_mob(player)
-outside.add_mob(dwarf)
+hub.add_mob(dwarf)
 
 # Items setup
 

@@ -29,4 +29,9 @@ module Inventory
     @items.include?(target)
   end
   # rubocop:enable Style/PredicateName
+
+  def drop_item(item)
+    room.add_item(item)
+    remove_item(item)
+  end
 end

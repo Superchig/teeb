@@ -89,6 +89,9 @@ module Menu
     when /^remove/
       eval_str.slice!(/^remove /)
       player.eval_remove(eval_str)
+    when /^drop/
+      eval_str.slice!(/^drop /)
+      player.eval_drop(eval_str)
     else
       puts "#{choice} is not a valid command"
     end unless moved # Don't run the case statement if the player moved
