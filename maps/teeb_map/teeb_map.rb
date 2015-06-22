@@ -33,9 +33,20 @@ outside.add_mob(dwarf)
 
 # Items setup
 
-broken_watch = Item.new("Broken Watch", "A peculiar analog wristwatch. It is stuck at the time 4:20.")
+gold_watch = Wearable.new("Gold Watch", "A beautiful, diamond-encrusted Nike knock-off.",
+                          :left_wrist)
 spoon = Item.new("Spoon", "There is no spoon!")
 
-player.room.add_item(broken_watch, spoon)
+player.room.add_item(gold_watch, spoon)
+
+derpy_fed = Wearable.new("Derpy Fedora", "You have no idea what derpy means.", :head)
+fant_pants = Wearable.new("Fantastic Pants", "These pants are simply phenomenal.",
+                          :legs)
+broken_watch = Wearable.new("Broken Watch", "A peculiar analog wristwatch. It is stuck at the time 4:20.",
+                            :left_wrist)
+
+player.wear(derpy_fed)
+player.wear(fant_pants)
+player.wear(broken_watch)
 
 Menu.gen_loop(player)

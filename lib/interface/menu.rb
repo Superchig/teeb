@@ -1,7 +1,6 @@
 require_rel 'movement.rb'
 
-# Basically the start menu
-# Prompts and choices may be put in a different module
+# The start menu, and the prompts that receive player input.
 module Menu
   module_function
 
@@ -77,13 +76,19 @@ module Menu
       eval_str.slice!(/^look/)
       player.eval_look(eval_str)
     when "get gud scrub"
-      puts "What! You found this, huh. Did you look at the source code?"
+      puts "You found this, huh. Did you look at the source code?"
       puts "That was a rhetorical question. I'm too lazy to add a prompt and conditionals here."
     when /^get/
       eval_str.slice!(/^get /)
       player.get_item(eval_str, player)
     when 'i'
-      player.show_items
+      player.show_inventory
+    when /^wear/
+      eval_str.slice!(/^wear /)
+      player.eval_wear(eval_str)
+    when /^remove/
+      eval_str.slice!(/^remove /)
+      player.eval_remove(eval_str)
     else
       puts "#{choice} is not a valid command"
     end unless moved # Don't run the case statement if the player moved

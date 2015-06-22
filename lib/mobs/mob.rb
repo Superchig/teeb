@@ -5,6 +5,7 @@ require_rel "../mixins/"
 class Mob
   include Lookable
   include Inventory
+  include InventoryEquipment
 
   attr_accessor :name, :description, :health, :max_health,
                 :magic_points, :max_magic_points, :room
@@ -16,7 +17,7 @@ class Mob
                  description = "This is the default mob description.",
                  health = 100,
                  max_health = 100, magic_points = 100, max_magic_points = 100,
-                 room = nil, items = [])
+                 room = nil, items = [], equipment = {})
     @name = name
     @description = description
     @health = health
@@ -25,6 +26,7 @@ class Mob
     @max_magic_points = max_magic_points
     @room = room
     init_items(items)
+    @equipment = equipment
   end
 
   def attack(_target)

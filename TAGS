@@ -6,12 +6,18 @@ class TestMob < Minitest::TestTestMob9,0
   def test_mob_healthtest_mob_health32,0
   def test_mob_magic_pointstest_mob_magic_points40,0
 
-test/item_test.rb,183
-class TestMap < Minitest::TestTestMap9,0
-  def setupsetup10,0
-  def test_ownershiptest_ownership27,0
-  def test_removaltest_removal32,0
-  def test_transfertest_transfer39,0
+test/item_test.rb,182
+class TestMap < Minitest::TestTestMap8,0
+  def setupsetup9,0
+  def test_ownershiptest_ownership26,0
+  def test_removaltest_removal31,0
+  def test_transfertest_transfer38,0
+
+test/wearable_test.rb,149
+class TestWearable < Minitest::TestTestWearable7,0
+  def setupsetup8,0
+  def test_wearingtest_wearing24,0
+  def test_removaltest_removal28,0
 
 test/map_test.rb,200
 class TestMap < Minitest::TestTestMap7,0
@@ -20,45 +26,53 @@ class TestMap < Minitest::TestTestMap7,0
   def test_remove_mobstest_remove_mobs36,0
   def test_move_mobstest_move_mobs42,0
 
-lib/items/item.rb,322
+lib/items/wearable.rb,178
+class Wearable < ItemWearable4,0
+  attr_accessor :placementplacement5,0
+  attr_accessor :placementplacement=5,0
+  def initialize(name = "Generic Wearable",initialize10,0
+
+lib/items/item.rb,293
 class ItemItem6,0
   attr_accessor :name, :descriptionname8,0
   attr_accessor :name, :descriptionname=8,0
   attr_accessor :name, :descriptiondescription8,0
   attr_accessor :name, :descriptiondescription=8,0
   def initialize(name = "Default Item",initialize10,0
-  def ==(other_item)==20,0
-  def to_sto_s24,0
+  def to_sto_s20,0
 
-lib/mobs/mob.rb,1194
+lib/mobs/mob.rb,1208
 class MobMob5,0
-  attr_accessor :name, :description, :health, :max_health,name9,0
-  attr_accessor :name, :description, :health, :max_health,name=9,0
-  attr_accessor :name, :description, :health, :max_health,description9,0
-  attr_accessor :name, :description, :health, :max_health,description=9,0
-  attr_accessor :name, :description, :health, :max_health,health9,0
-  attr_accessor :name, :description, :health, :max_health,health=9,0
-  attr_accessor :name, :description, :health, :max_health,max_health9,0
-  attr_accessor :name, :description, :health, :max_health,max_health=9,0
-  attr_accessor :name, :description, :health, :max_health,magic_points9,0
-  attr_accessor :name, :description, :health, :max_health,magic_points=9,0
-  attr_accessor :name, :description, :health, :max_health,max_magic_points9,0
-  attr_accessor :name, :description, :health, :max_health,max_magic_points=9,0
-  attr_accessor :name, :description, :health, :max_health,room9,0
-  attr_accessor :name, :description, :health, :max_health,room=9,0
-  def initialize(name = "Default Mob Name",initialize15,0
-  def attack(_target)attack30,0
-  def move(next_room)move34,0
-  def to_sto_s40,0
+  attr_accessor :name, :description, :health, :max_health,name10,0
+  attr_accessor :name, :description, :health, :max_health,name=10,0
+  attr_accessor :name, :description, :health, :max_health,description10,0
+  attr_accessor :name, :description, :health, :max_health,description=10,0
+  attr_accessor :name, :description, :health, :max_health,health10,0
+  attr_accessor :name, :description, :health, :max_health,health=10,0
+  attr_accessor :name, :description, :health, :max_health,max_health10,0
+  attr_accessor :name, :description, :health, :max_health,max_health=10,0
+  attr_accessor :name, :description, :health, :max_health,magic_points10,0
+  attr_accessor :name, :description, :health, :max_health,magic_points=10,0
+  attr_accessor :name, :description, :health, :max_health,max_magic_points10,0
+  attr_accessor :name, :description, :health, :max_health,max_magic_points=10,0
+  attr_accessor :name, :description, :health, :max_health,room10,0
+  attr_accessor :name, :description, :health, :max_health,room=10,0
+  def initialize(name = "Default Mob Name",initialize16,0
+  def attack(_target)attack32,0
+  def move(next_room)move36,0
+  def to_sto_s42,0
 
-lib/mobs/player.rb,373
+lib/mobs/player.rb,497
 class Player < MobPlayer5,0
   def show_itemsshow_items6,0
-  def check_for_lookable_name(lookable_name) # Can be refactored to be shorter, though perhaps not as readable.check_for_lookable_name12,0
-  def eval_look(to_look)eval_look32,0
-  def look_at(lookable_name)look_at41,0
-  def eval_get(item_name)eval_get47,0
-  def get_item(item_name, player)get_item55,0
+  def show_wearingshow_wearing17,0
+  def show_inventoryshow_inventory25,0
+  def check_for_lookable_name(lookable_name) # Can be refactored to be shorter, though perhaps not as readable.check_for_lookable_name30,0
+  def eval_look(to_look)eval_look50,0
+  def look_at(lookable_name)look_at59,0
+  def eval_get(item_name)eval_get65,0
+  def get_item(item_name, player)get_item73,0
+  def eval_wear(wearable_name)eval_wear88,0
 
 lib/map/room.rb,581
 class RoomRoom6,0
@@ -82,22 +96,30 @@ module MovementMovement21,0
   def move_with_look(player, sym_direction)move_with_look24,0
   def eval_move(direction, player)eval_move29,0
 
-lib/interface/menu.rb,413
-module MenuMenu5,0
-  def creditscredits8,0
-  def welcome_messagewelcome_message13,0
-  def adventures_menuadventures_menu18,0
-  def eval_adventures(choice)eval_adventures30,0
-  def eval_choice(choice)eval_choice39,0
-  def start_loopstart_loop53,0
+lib/interface/menu.rb,414
+module MenuMenu4,0
+  def creditscredits7,0
+  def welcome_messagewelcome_message12,0
+  def adventures_menuadventures_menu17,0
+  def eval_adventures(choice)eval_adventures29,0
+  def eval_choice(choice)eval_choice38,0
+  def start_loopstart_loop52,0
   def eval_com(choice, player)eval_com69,0
-  def prompt(player)prompt91,0
-  def start_promptstart_prompt98,0
-  def gen_loop(player)gen_loop104,0
+  def prompt(player)prompt95,0
+  def start_promptstart_prompt102,0
+  def gen_loop(player)gen_loop108,0
 
 lib/mixins/lookable.rb,49
 module LookableLookable2,0
   def showshow3,0
+
+lib/mixins/inventory_equip.rb,254
+module InventoryEquipmentInventoryEquipment3,0
+  attr_accessor :equipmentequipment4,0
+  attr_accessor :equipmentequipment=4,0
+  def wearing?(wearable)wearing?6,0
+  def remove_wearable(wearable)remove_wearable10,0
+  def wear(wearable)wear17,0
 
 lib/mixins/inventory.rb,331
 module InventoryInventory2,0
@@ -107,4 +129,4 @@ module InventoryInventory2,0
   def add_item(*items_to_add)add_item9,0
   def remove_item(*items_to_remove)remove_item16,0
   def move_item(target_mob, *items_to_move)move_item20,0
-  def has_item?(target)has_item?27,0
+  def has_item?(target)has_item?28,0

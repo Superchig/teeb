@@ -2,7 +2,6 @@ require 'minitest/autorun'
 require 'require_all'
 
 require_rel '../lib/items'
-require_rel '../lib/map'
 require_rel '../lib/mobs'
 
 # Tests out ownership, transfering, and removal of items
