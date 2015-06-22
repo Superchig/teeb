@@ -17,8 +17,6 @@ DESC
     @sme_band = Wearable.new("Smelly Bandana", sme_band_desc,
                              :head)
 
-    p @mob1.wearing?(@sme_band)
-
     @mob1.wear(@sme_band)
   end
 

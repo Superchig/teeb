@@ -16,8 +16,7 @@ module InventoryEquipment
   end
 
   def remove_wearable(wearable)
-    p equipment[wearable.placement]
-    add_item(equipment[wearable.placement].dup)
+    add_item(equipment[wearable.placement])
     equipment.delete(wearable.placement)
     puts "You removed #{wearable.name}"
   end
