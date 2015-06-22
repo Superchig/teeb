@@ -1,25 +1,30 @@
+require 'rainbow'
+
 require_rel 'mob.rb'
 require_rel '../interface/movement.rb'
 
 # Has player-only specifics
 class Player < Mob
+  WEARING_COLOR = "#0000FF"
+
   def show_items
     if @items.empty?
-      puts "You have no items in your immediate inventory."
+      puts Rainbow("You have no items in your immediate inventory.").color(:yellow)
       return nil
     end
 
     items_string = @items.map(&:name).join(", ")
+    items_string = Rainbow(items_string).color(:yellow)
 
-    puts "Inventory: #{items_string}"
+    puts Rainbow("Inventory:").underline.color(:yellow) << " " << items_string
   end
 
   def show_wearing
-    return puts "You're not wearing anything." if @equipment.empty?
+    return puts Rainbow("You're not wearing anything.").color(WEARING_COLOR) if @equipment.empty?
 
     equipment_string = @equipment.map { |_placement, wearable| wearable.name }.join(", ")
 
-    puts "Wearing: #{equipment_string}"
+    puts Rainbow("Wearing:").color(WEARING_COLOR).underline << Rainbow(" #{equipment_string}").color(WEARING_COLOR)
   end
 
   def show_inventory

@@ -36,23 +36,30 @@ class Room
     end
   end
 
+  MOBS_COLOR = :red
+
   def show_mobs
-    @mobs.each do |mob|
-      puts "There is a #{mob.name}"
-    end
+    mobs_str_beg = Rainbow("Mobs:").color(MOBS_COLOR).underline
+    mobs_string = @mobs.map(&:name).join(', ')
+    mobs_string = Rainbow(mobs_string).color(MOBS_COLOR)
+
+    puts mobs_str_beg << " " << mobs_string
   end
 
+  ITEMS_COLOR = "#00CC99"
+
   def show_items
-    output = "Room Items: "
+    output = Rainbow("Room Items:").color(ITEMS_COLOR).underline
 
     room_items = @items.map(&:name).join ', '
 
-    output << room_items
+    output << " " << Rainbow(room_items).color(ITEMS_COLOR)
 
     puts output
   end
 
   def show
+    puts Rainbow(@name).color(:blue).bright
     puts @description
 
     unseen_message = "You do not see anyone else here."
