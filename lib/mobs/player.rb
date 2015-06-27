@@ -58,8 +58,8 @@ class Player < Mob
 
     @items.each(&check_lookable)
 
-    @room.paths.each do |_p, room|
-      lookable_exists = room.name.downcase =~ lookable_name.to_regexp
+    @room.paths.each do |path, room|
+      lookable_exists = path.to_s.downcase =~ lookable_name.to_regexp
       lookable = room if lookable_exists
     end
 

@@ -59,8 +59,7 @@ class Room
   end
 
   def show
-    puts Rainbow(@name).color(:blue).bright
-    puts @description
+    super
 
     unseen_message = "You do not see anyone else here."
 
