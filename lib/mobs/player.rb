@@ -1,17 +1,20 @@
 require 'rainbow'
 
 require_rel 'mob.rb'
-require_rel '../interface/movement.rb'
+
+# Allows for more abstract conversion from string to regexp
+class String
+  def to_regexp
+    /#{Regexp.quote(self)}/
+  end
+end
 
 # Has player-only specifics
 class Player < Mob
-  WEARING_COLOR = "#0000FF"
-
   def show_items
-    if @items.empty?
-      puts Rainbow("You have no items in your immediate inventory.").color(:yellow)
-      return nil
-    end
+    empty_message = Rainbow("You have no items in your immediate inventory.").color(:yellow)
+
+    return puts empty_message if @items.empty?
 
     items_string = @items.map(&:name).join(", ")
     items_string = Rainbow(items_string).color(:yellow)
@@ -19,12 +22,20 @@ class Player < Mob
     puts Rainbow("Inventory:").underline.color(:yellow) << " " << items_string
   end
 
+  WEARING_COLOR = "#0000FF"
+
   def show_wearing
-    return puts Rainbow("You're not wearing anything.").color(WEARING_COLOR) if @equipment.empty?
+    not_wearing = Rainbow("You're not wearing anything.").color(WEARING_COLOR)
+
+    return puts not_wearing if @equipment.empty?
 
     equipment_string = @equipment.map { |_placement, wearable| wearable.name }.join(", ")
 
-    puts Rainbow("Wearing:").color(WEARING_COLOR).underline << Rainbow(" #{equipment_string}").color(WEARING_COLOR)
+    col_und_wearing = Rainbow("Wearing:").color(WEARING_COLOR).underline
+
+    colored_equipment = Rainbow(" #{equipment_string}").color(WEARING_COLOR)
+
+    puts col_und_wearing << colored_equipment
   end
 
   def show_inventory
@@ -34,31 +45,27 @@ class Player < Mob
 
   def check_for_lookable_name(lookable_name) # Can be refactored to be shorter, though perhaps not as readable.
     # Can also be refactored into separate methods for each block. Tried to do so, but failed.
-    @room.mobs.each do |mob|
-      lookable_name_exists = mob.name.downcase == lookable_name
-      return mob if lookable_name_exists
+    lookable = false
+
+    check_lookable = proc do |poss|
+      lookable_exists = poss.name.downcase =~ lookable_name.to_regexp
+      lookable = poss if lookable_exists
     end
 
-    @room.items.each do |item|
-      lookable_name_exists = item.name.downcase == lookable_name
-      return item if lookable_name_exists
-    end
+    @room.mobs.each(&check_lookable)
 
-    @items.each do |item|
-      lookable_name_exists = item.name.downcase == lookable_name
-      return item if lookable_name_exists
-    end
+    @room.items.each(&check_lookable)
 
-    false
+    @items.each(&check_lookable)
+
+    lookable
   end
 
   def eval_look(to_look)
-    if to_look.empty?
-      @room.show
-    else
-      to_look.slice!(" ")
-      look_at(to_look)
-    end
+    return @room.show if to_look.empty?
+
+    to_look.slice!(" ")
+    look_at(to_look)
   end
 
   def look_at(lookable_name)
@@ -70,32 +77,34 @@ class Player < Mob
   def eval_get(item_name)
     return_item = false
 
-    @room.items.each { |item| return_item = item if item.name.downcase == item_name }
+    @room.items.each { |item| return_item = item if item.name.downcase =~ item_name.to_regexp  }
 
     return_item
   end
 
   def get_item(item_name, player)
-    if item_name.empty? || item_name == "get"
-      puts "USAGE: get [item]"
-      return nil
-    end
+    return puts "USAGE: get [item]" if item_name.empty? || item_name == "get"
 
     item = eval_get(item_name)
     if item
       player.room.move_item(player, item)
-      puts "You get #{item_name}."
+      puts "You get #{item.name}."
     else
       puts "You can't get #{item_name}."
     end
   end
 
   def eval_wear(wearable_name)
-    return puts "USAGE: wear [wearable]" if wearable_name.empty? || wearable_name == "wear"
+    usage_message = "USAGE: wear [wearable]"
+    usage_error = wearable_name.empty? || wearable_name == "wear"
+
+    return puts usage_message if usage_error
 
     wearable = false
 
-    check_items = proc { |item| wearable = item if item.name.downcase == wearable_name && item.is_a?(Wearable) }
+    wearable_regexp = wearable_name.to_regexp
+
+    check_items = proc { |item| wearable = item if item.name.downcase =~ wearable_regexp && item.is_a?(Wearable) }
 
     @items.each(&check_items)
 
@@ -105,25 +114,32 @@ class Player < Mob
   end
 
   def eval_remove(wearable_name)
-    return puts "USAGE: remove [wearable being worn]" if wearable_name.empty? || wearable_name == "remove"
+    usage_message = "USAGE: remove [wearable being worn]"
+    usage_error = wearable_name.empty? || wearable_name == "remove"
+
+    return puts usage_message if usage_error
 
     to_remove = false
 
-    @equipment.each { |_placement, wearable| to_remove = wearable if wearable.name.downcase == wearable_name }
+    @equipment.each { |_p, wearable| to_remove = wearable if wearable.name.downcase =~ wearable_name.to_regexp }
 
-    to_remove ? remove_wearable(to_remove) : (puts "You're not wearing #{wearable_name}")
+    not_wearing_error = "You're not wearing #{wearable_name}"
+    to_remove ? remove_wearable(to_remove) : (puts not_wearing_error)
   end
 
   def eval_drop(item_name)
-    return puts "USAGE: drop [item]" if item_name.empty? || item_name == "drop"
+    usage_message = "USAGE: drop [item]"
+    usage_error = item_name.empty? || item_name == "drop"
+
+    return puts usage_message if usage_error
 
     to_drop = false
 
-    @items.each { |item| to_drop = item if item.name.downcase == item_name }
+    @items.each { |item| to_drop = item if item.name.downcase =~ item_name.to_regexp }
 
     if to_drop
       drop_item(to_drop)
-      puts "You dropped #{item_name}."
+      puts "You dropped #{to_drop.name}."
     else
       puts "#{item_name} is not in your inventory."
     end

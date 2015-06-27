@@ -86,13 +86,23 @@ spoon = Item.new("Spoon", "There is no spoon!")
 player.room.add_item(gold_watch, spoon)
 
 derpy_fed = Wearable.new("Derpy Fedora", "You have no idea what derpy means.", :head)
+
+musty_t_desc = <<DESC
+This does not have an unusual odor, despite what its name suggests.
+Rather, it seems slightly dated and apathetic.
+In fact, it has some sort of odd lettering on it. It shows S-CRY-ed.
+DESC
+musty_t = Wearable.new("Musty T-Shirt", musty_t_desc, :body)
+
 fant_pants = Wearable.new("Fantastic Pants", "These pants are simply phenomenal.",
                           :legs)
+
 broken_watch = Wearable.new("Broken Watch", "A peculiar analog wristwatch. It is stuck at the time 4:20.",
                             :left_wrist)
 
 player.wear(derpy_fed)
 player.wear(fant_pants)
 player.wear(broken_watch)
+player.wear(musty_t)
 
 Menu.gen_loop(player)
