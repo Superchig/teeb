@@ -7,8 +7,7 @@ Welcome to a project that I'm using to get a feel for test-driven development an
 	3. Drop items.
 	1. Have other mobs wear and carry items.
 	1. Show this when you look at them.
-3. Allow for looking at other rooms
-4. Add doors
+4. Add furniture
 5. Implement stats and/or skills
 6. Implement combat
 7. Finish to-do list
