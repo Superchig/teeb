@@ -61,4 +61,4 @@ Style/TrailingWhitespace:
   Enabled: true
 
 Metrics/ClassLength:
-	Max: 150
+  Max: 150

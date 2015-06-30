@@ -133,7 +133,10 @@ class Player < Mob
     to_remove_array = []
     if wearable_string.include?(',')
       @equipment.each do |_p, wearable|
-        wearable_string.split(', ').each { |inner_wearable| to_remove_array.push(wearable) if wearable.name.downcase =~ inner_wearable.to_regexp }
+        wearable_string.split(', ').each do |inner_wearable|
+          name_matches = wearable.name.downcase =~ inner_wearable.to_regexp
+          to_remove_array.push(wearable) if name_matches
+        end
       end
       return to_remove_array
     else
