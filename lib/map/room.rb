@@ -11,12 +11,13 @@ class Room
   attr_reader :mobs, :paths
 
   def initialize(name = "Default Room", description = "This is the default room description", \
-                 mobs = [], paths = {}, items = [])
+                 mobs = [], paths = {}, items = [], furniture = [])
     @name = name
     @description = description
     @mobs = mobs
     @paths = paths
     init_items(items)
+    @furniture = furniture
   end
 
   def add_mob(*mobs)
@@ -51,11 +52,30 @@ class Room
   def show_items
     output = Rainbow("Room Items:").color(ITEMS_COLOR).underline
 
-    room_items = @items.map(&:name).join ', '
+    room_items = @items.map do |item|
+      if item.is_a? Furniture
+        item.name unless item.placed
+      elsif item.is_a? Item
+        item.name
+      else
+        "Error. An 'item' was, oddly enough, neither an item nor furniture."
+      end
+    end.join(', ')
 
     output << " " << Rainbow(room_items).color(ITEMS_COLOR)
 
     puts output
+  end
+
+  def add_furniture(*furniture_to_add)
+    furniture_to_add.each do |furn|
+      @furniture.add(furn)
+      remove_item(furn)
+    end
+  end
+
+  def remove_furniture(*furniture_to_remove)
+    furniture_to_remove.each { |furn| @furniture.delete(furn) }
   end
 
   def show

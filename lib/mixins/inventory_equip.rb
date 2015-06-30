@@ -15,10 +15,11 @@ module InventoryEquipment
     equipment[wearable.placement] = wearable
   end
 
-  def remove_wearable(wearable)
-    add_item(equipment[wearable.placement])
-    equipment.delete(wearable.placement)
-    puts "You removed #{wearable.name}"
+  def remove_wearable(*wearables)
+    wearables.flatten.each do |wearable|
+      add_item(equipment[wearable.placement])
+      equipment.delete(wearable.placement)
+    end
   end
 
   def wear(wearable)

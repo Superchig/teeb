@@ -59,3 +59,6 @@ Style/StringLiterals:
 # Cop supports --auto-correct.
 Style/TrailingWhitespace:
   Enabled: true
+
+Metrics/ClassLength:
+	Max: 150

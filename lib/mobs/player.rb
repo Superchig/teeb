@@ -9,6 +9,17 @@ class String
   end
 end
 
+# Conversion to more displayed string
+class Array
+  def to_output_string
+    map(&:name).join(', ')
+  end
+
+  def debug_show
+    each { |item| puts item }
+  end
+end
+
 # Has player-only specifics
 class Player < Mob
   def show_items
@@ -16,7 +27,7 @@ class Player < Mob
 
     return puts empty_message if @items.empty?
 
-    items_string = @items.map(&:name).join(", ")
+    items_string = @items.to_output_string
     items_string = Rainbow(items_string).color(:yellow)
 
     puts Rainbow("Inventory:").underline.color(:yellow) << " " << items_string
@@ -118,18 +129,45 @@ class Player < Mob
     wearable ? wear(wearable) : (puts "You can't wear #{wearable_name}.")
   end
 
-  def eval_remove(wearable_name)
+  def convert_to_remove(wearable_string)
+    to_remove_array = []
+    if wearable_string.include?(',')
+      @equipment.each do |_p, wearable|
+        wearable_string.split(', ').each { |inner_wearable| to_remove_array.push(wearable) if wearable.name.downcase =~ inner_wearable.to_regexp }
+      end
+      return to_remove_array
+    else
+      @equipment.each do |_p, wearable|
+        return wearable if wearable.name.downcase =~ wearable_string.to_regexp
+      end
+    end
+  end
+
+  def class_eval_remove(to_remove, error_msg)
+    if to_remove.is_a? Array
+      if to_remove.empty?
+        puts error_msg
+      else
+        remove_wearable(to_remove)
+        puts "You removed #{to_remove.to_output_string}"
+      end
+    elsif to_remove.is_a? Wearable
+      remove_wearable(to_remove)
+      puts "You removed #{to_remove.name}"
+    end
+  end
+
+  def eval_remove(wearable_string)
     usage_message = "USAGE: remove [wearable being worn]"
-    usage_error = wearable_name.empty? || wearable_name == "remove"
+    usage_error = wearable_string.empty? || wearable_string == "remove"
 
     return puts usage_message if usage_error
 
-    to_remove = false
+    to_remove = convert_to_remove(wearable_string)
 
-    @equipment.each { |_p, wearable| to_remove = wearable if wearable.name.downcase =~ wearable_name.to_regexp }
+    not_wearing_error = "You're not wearing #{wearable_string}"
 
-    not_wearing_error = "You're not wearing #{wearable_name}"
-    to_remove ? remove_wearable(to_remove) : (puts not_wearing_error)
+    class_eval_remove(to_remove, not_wearing_error)
   end
 
   def eval_drop(item_name)

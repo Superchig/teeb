@@ -82,6 +82,7 @@ hub.add_mob(dwarf)
 gold_watch = Wearable.new("Gold Watch", "A beautiful, diamond-encrusted Nike knock-off.",
                           :left_wrist)
 spoon = Item.new("Spoon", "There is no spoon!")
+usel_lamp = Furniture.new("Useless Lamp", "This lamp cannot do anything.")
 
 player.room.add_item(gold_watch, spoon)
 
