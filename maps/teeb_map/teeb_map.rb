@@ -106,4 +106,6 @@ player.wear(fant_pants)
 player.wear(broken_watch)
 player.wear(musty_t)
 
+## Game start
+
 Menu.gen_loop(player)

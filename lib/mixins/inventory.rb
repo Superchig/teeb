@@ -1,4 +1,6 @@
-# To mix-in for all stuff that can hold items
+# To mix-in for all stuff that can hold items.
+# Each item used is a reference to an Item object, not a string with the name of
+# the item.
 module Inventory
   attr_accessor :items
 
@@ -7,10 +9,7 @@ module Inventory
   end
 
   def add_item(*items_to_add)
-    # items_to_add.each { |item| @items.push(item) }
-    items_to_add.each do |item|
-      @items.push(item)
-    end
+    items_to_add.each { |item| @items.push(item) }
   end
 
   def remove_item(*items_to_remove)

@@ -2,14 +2,14 @@ require 'rainbow'
 
 require_rel 'mob.rb'
 
-# Allows for more abstract conversion from string to regexp
+# Allows for more abstract conversion from string to regexp.
 class String
   def to_regexp
     /#{Regexp.quote(self)}/
   end
 end
 
-# Conversion to more displayed string
+# Conversion to more displayed string.
 class Array
   def to_output_string
     map(&:name).join(', ')
@@ -20,7 +20,9 @@ class Array
   end
 end
 
-# Has player-only specifics
+# Has player-only specifics.
+# Due to poor design choices, it's mainly a pseudo-parser for each command.
+# In the process of refactoring.
 class Player < Mob
   def show_items
     empty_message = Rainbow("You have no items in your immediate inventory.").color(:yellow)
@@ -52,42 +54,6 @@ class Player < Mob
   def show_inventory
     show_items
     show_wearing
-  end
-
-  def check_for_lookable_name(lookable_name) # Can be refactored to be shorter, though perhaps not as readable.
-    # Can also be refactored into separate methods for each block. Tried to do so, but failed.
-    lookable = false
-
-    check_lookable = proc do |poss|
-      lookable_exists = poss.name.downcase =~ lookable_name.to_regexp
-      lookable = poss if lookable_exists
-    end
-
-    @room.mobs.each(&check_lookable)
-
-    @room.items.each(&check_lookable)
-
-    @items.each(&check_lookable)
-
-    @room.paths.each do |path, room|
-      lookable_exists = path.to_s.downcase =~ lookable_name.to_regexp
-      lookable = room if lookable_exists
-    end
-
-    lookable
-  end
-
-  def eval_look(to_look)
-    return @room.show if to_look.empty?
-
-    to_look.slice!(" ")
-    look_at(to_look)
-  end
-
-  def look_at(lookable_name)
-    cannot_look_message = "You cannot see #{lookable_name}. Is it even here?"
-    lookable = check_for_lookable_name(lookable_name)
-    lookable ? (puts lookable.show) : (puts cannot_look_message)
   end
 
   def eval_get(item_name)
