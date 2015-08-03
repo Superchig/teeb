@@ -10,8 +10,13 @@ module Parser
     eval_str = choice.dup
 
     case choice
+    when /^look/
+      eval_str.slice!(/^look/)
+      eval_str = "l" + eval_str
+      eval_str.slice!(/^l /)
+      eval_look(player, eval_str)
     when /^l/
-      eval_str.slice!(/^l/)
+      eval_str.slice!(/^l /)
       eval_look(player, eval_str)
     when "get gud scrub", "git gud scrub"
       puts "You found this, huh. Did you look at the source code?"
@@ -31,7 +36,7 @@ module Parser
       eval_str.slice!(/^drop /)
       player.eval_drop(eval_str)
     else
-      puts "#{choice} is not a valid command"
+      puts "#{choice} is not a valid command."
     end unless moved # Don't run the case statement if the player moved
   end
   # rubocop:enable Metrics/CyclomaticComplexity
@@ -64,9 +69,8 @@ module Parser
   end
 
   def eval_look(player, to_look)
-    return player.room.show if to_look.empty?
+    return player.room.show if to_look.empty? || to_look == "l"
 
-    to_look.slice!(" ")
     look_at(player, to_look)
   end
 
