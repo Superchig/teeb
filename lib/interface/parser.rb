@@ -23,7 +23,7 @@ module Parser
       puts "That was a rhetorical question. I'm too lazy to add a prompt and conditionals here."
     when /^get/
       eval_str.slice!(/^get /)
-      player.get_item(eval_str, player)
+      eval_get(player, eval_str)
     when 'i'
       player.show_inventory
     when /^wear/
@@ -37,7 +37,7 @@ module Parser
       player.eval_drop(eval_str)
     else
       puts "#{choice} is not a valid command."
-    end unless moved # Don't run the case statement if the player moved
+    end unless moved # Don't run the case statement if the player moved.
   end
   # rubocop:enable Metrics/CyclomaticComplexity
 
@@ -78,5 +78,27 @@ module Parser
     cannot_look_message = "You cannot see #{lookable_name}. Is it even here?"
     lookable = check_for_lookable_name(player, lookable_name)
     lookable ? (puts lookable.show) : (puts cannot_look_message)
+  end
+
+  def get_item(player, item_name)
+    return_item = false
+
+    player.room.items.each do |item|
+      return_item = item if item.name.downcase =~ item_name.to_regexp
+    end
+
+    return_item
+  end
+
+  def eval_get(player, item_name)
+    return puts "USAGE: get [item]" if item_name.empty? || item_name == "get"
+
+    item = get_item(player, item_name)
+    if item
+      player.room.move_item(player, item)
+      puts "You get #{item.name}."
+    else
+      puts "You can't get #{item_name}."
+    end
   end
 end

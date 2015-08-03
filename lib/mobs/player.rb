@@ -56,26 +56,6 @@ class Player < Mob
     show_wearing
   end
 
-  def eval_get(item_name)
-    return_item = false
-
-    @room.items.each { |item| return_item = item if item.name.downcase =~ item_name.to_regexp  }
-
-    return_item
-  end
-
-  def get_item(item_name, player)
-    return puts "USAGE: get [item]" if item_name.empty? || item_name == "get"
-
-    item = eval_get(item_name)
-    if item
-      player.room.move_item(player, item)
-      puts "You get #{item.name}."
-    else
-      puts "You can't get #{item_name}."
-    end
-  end
-
   def eval_wear(wearable_name)
     usage_message = "USAGE: wear [wearable]"
     usage_error = wearable_name.empty? || wearable_name == "wear"
