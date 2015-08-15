@@ -24,7 +24,7 @@ module Menu
     print "> "
 
     choice = $stdin.gets.chomp
-    Parser.eval_com(choice.downcase, player)
+    Parser.parse_com(choice.downcase, player)
   end
 
   def start_loop
@@ -39,7 +39,7 @@ module Menu
       print "> "
 
       choice = $stdin.gets.chomp
-      break if eval_choice(choice) == false
+      break if parse_choice(choice) == false
     end
   end
 
@@ -60,12 +60,12 @@ module Menu
     puts "2. Exit (not an adventure)"
 
     choice = $stdin.gets.chomp
-    eval_adventures(choice)
+    parse_adventures(choice)
 
     puts ""
   end
 
-  def eval_adventures(choice)
+  def parse_adventures(choice)
     case choice
     when '1'
       load_rel '../../maps/teeb_map/teeb_map.rb'
@@ -74,7 +74,7 @@ module Menu
     end
   end
 
-  def eval_choice(choice)
+  def parse_choice(choice)
     case choice
     when '1'
       adventures_menu

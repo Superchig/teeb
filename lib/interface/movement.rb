@@ -26,7 +26,7 @@ module Movement
     player.room.show
   end
 
-  def eval_move(direction, player)
+  def parse_move(direction, player)
     sym_direction = direction.to_direction
     should_move = !player.room.paths[sym_direction].nil?
 

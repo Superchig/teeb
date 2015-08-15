@@ -4,37 +4,37 @@ module Parser
   ## Generic Parsing
 
   # rubocop:disable Metrics/CyclomaticComplexity
-  def eval_com(choice, player)
-    moved = Movement.eval_move(choice, player)
+  def parse_com(choice, player)
+    moved = Movement.parse_move(choice, player)
 
-    eval_str = choice.dup
+    parse_str = choice.dup
 
     case choice
     when /^look/
-      eval_str.slice!(/^look/)
-      eval_str = "l" + eval_str
-      eval_str.slice!(/^l /)
-      eval_look(player, eval_str)
+      parse_str.slice!(/^look/)
+      parse_str = "l" + parse_str
+      parse_str.slice!(/^l /)
+      parse_look(player, parse_str)
     when /^l/
-      eval_str.slice!(/^l /)
-      eval_look(player, eval_str)
+      parse_str.slice!(/^l /)
+      parse_look(player, parse_str)
     when "get gud scrub", "git gud scrub"
       puts "You found this, huh. Did you look at the source code?"
       puts "That was a rhetorical question. I'm too lazy to add a prompt and conditionals here."
     when /^get/
-      eval_str.slice!(/^get /)
-      eval_get(player, eval_str)
+      parse_str.slice!(/^get /)
+      parse_get(player, parse_str)
     when 'i'
       player.show_inventory
     when /^wear/
-      eval_str.slice!(/^wear /)
-      eval_wear(player, eval_str)
+      parse_str.slice!(/^wear /)
+      parse_wear(player, parse_str)
     when /^remove/
-      eval_str.slice!(/^remove /)
-      eval_remove(player, eval_str)
+      parse_str.slice!(/^remove /)
+      parse_remove(player, parse_str)
     when /^drop/
-      eval_str.slice!(/^drop /)
-      player.eval_drop(eval_str)
+      parse_str.slice!(/^drop /)
+      player.parse_drop(parse_str)
     else
       puts "#{choice} is not a valid command."
     end unless moved # Don't run the case statement if the player moved.
@@ -68,7 +68,7 @@ module Parser
     lookable
   end
 
-  def eval_look(player, to_look)
+  def parse_look(player, to_look)
     return player.room.show if to_look.empty? || to_look == "l"
 
     look_at(player, to_look)
@@ -90,7 +90,7 @@ module Parser
     return_item
   end
 
-  def eval_get(player, item_name)
+  def parse_get(player, item_name)
     return puts "USAGE: get [item]" if item_name.empty? || item_name == "get"
 
     item = get_item(player, item_name)
@@ -102,7 +102,7 @@ module Parser
     end
   end
 
-  def eval_wear(player, wearable_name)
+  def parse_wear(player, wearable_name)
     usage_message = "USAGE: wear [wearable]"
     usage_error = wearable_name.empty? || wearable_name == "wear"
 
@@ -154,7 +154,7 @@ module Parser
     end
   end
 
-  def class_eval_remove(player, to_remove, error_msg)
+  def class_parse_remove(player, to_remove, error_msg)
     if to_remove.is_a? Array
       if to_remove.empty?
         puts error_msg
@@ -168,7 +168,7 @@ module Parser
     end
   end
 
-  def eval_remove(player, wearable_string)
+  def parse_remove(player, wearable_string)
     usage_message = "USAGE: remove [wearable being worn]"
     usage_error = wearable_string.empty? || wearable_string == "remove"
 
@@ -178,6 +178,6 @@ module Parser
 
     not_wearing_error = "You're not wearing #{wearable_string}"
 
-    class_eval_remove(player, to_remove, not_wearing_error)
+    class_parse_remove(player, to_remove, not_wearing_error)
   end
 end
