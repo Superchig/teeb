@@ -62,7 +62,7 @@ class MobMob5,0
   def move(next_room)move35,0
   def to_sto_s41,0
 
-lib/mobs/player.rb,619
+lib/mobs/player.rb,572
 class StringString6,0
   def to_regexpto_regexp7,0
 class ArrayArray13,0
@@ -73,11 +73,10 @@ class Player < MobPlayer26,0
   WEARING_COLOR = "#0000FF"WEARING_COLOR38,0
   def show_wearingshow_wearing40,0
   def show_inventoryshow_inventory54,0
-  def eval_wear(wearable_name)eval_wear59,0
-  def convert_to_remove(wearable_string)convert_to_remove78,0
-  def class_eval_remove(to_remove, error_msg)class_eval_remove95,0
-  def eval_remove(wearable_string)eval_remove109,0
-  def eval_drop(item_name)eval_drop122,0
+  def convert_to_remove(wearable_string)convert_to_remove59,0
+  def class_eval_remove(to_remove, error_msg)class_eval_remove76,0
+  def eval_remove(wearable_string)eval_remove90,0
+  def eval_drop(item_name)eval_drop103,0
 
 lib/map/room.rb,785
 class RoomRoom6,0
@@ -111,7 +110,7 @@ module MovementMovement21,0
   def move_with_look(player, sym_direction)move_with_look24,0
   def eval_move(direction, player)eval_move29,0
 
-lib/interface/parser.rb,412
+lib/interface/parser.rb,467
 module ParserParser1,0
   def eval_com(choice, player)eval_com7,0
   def check_for_lookable_name(player, lookable_name) # Can be refactored to be shorter, though perhaps not as readable.check_for_lookable_name48,0
@@ -119,6 +118,7 @@ module ParserParser1,0
   def look_at(player, lookable_name)look_at77,0
   def get_item(player, item_name)get_item83,0
   def eval_get(player, item_name)eval_get93,0
+  def eval_wear(player, wearable_name)eval_wear105,0
 
 lib/interface/menu.rb,367
 module MenuMenu6,0

@@ -28,10 +28,10 @@ module Parser
       player.show_inventory
     when /^wear/
       eval_str.slice!(/^wear /)
-      player.eval_wear(eval_str)
+      eval_wear(player, eval_str)
     when /^remove/
       eval_str.slice!(/^remove /)
-      player.eval_remove(eval_str)
+      eval_remove(player, eval_str)
     when /^drop/
       eval_str.slice!(/^drop /)
       player.eval_drop(eval_str)
@@ -100,5 +100,84 @@ module Parser
     else
       puts "You can't get #{item_name}."
     end
+  end
+
+  def eval_wear(player, wearable_name)
+    usage_message = "USAGE: wear [wearable]"
+    usage_error = wearable_name.empty? || wearable_name == "wear"
+
+    return puts usage_message if usage_error
+
+    wearable = false
+
+    wearable_regexp = wearable_name.to_regexp
+
+    check_items = proc do |item|
+      wearable = item if item.name.downcase =~ wearable_regexp && item.is_a?(Wearable)
+    end
+
+    player.items.each(&check_items)
+
+    player.room.items.each(&check_items)
+
+    wearable ? player.wear(wearable) : (puts "You can't wear #{wearable_name}.")
+  end
+
+  # Internal: Takes a string and converts it into an array of references to
+  # Items in the player's equipment, split by ', '.
+  #
+  # player          - The Player whose equipment is checked for items.
+  # wearable_string - The String holding the (partial) names of items to find in
+  #                   player's equipment.
+  #
+  # Examples
+  #
+  #   convert_to_remove(player, "Hat, Socks, Glasses")
+  #   # => []
+  #
+  # Returns the array of Items.
+  def convert_to_remove(player, wearable_string)
+    to_remove_array = []
+    if wearable_string.include?(',')
+      player.equipment.each do |_p, wearable|
+        wearable_string.split(', ').each do |inner_wearable|
+          name_matches = wearable.name.downcase =~ inner_wearable.to_regexp
+          to_remove_array.push(wearable) if name_matches
+        end
+      end
+
+      to_remove_array
+    else
+      player.equipment.each do |_p, wearable|
+        return wearable if wearable.name.downcase =~ wearable_string.to_regexp
+      end
+    end
+  end
+
+  def class_eval_remove(player, to_remove, error_msg)
+    if to_remove.is_a? Array
+      if to_remove.empty?
+        puts error_msg
+      else
+        player.remove_wearable(to_remove)
+        puts "You removed #{to_remove.to_output_string}"
+      end
+    elsif to_remove.is_a? Wearable
+      remove_wearable(to_remove)
+      puts "You removed #{to_remove.name}"
+    end
+  end
+
+  def eval_remove(player, wearable_string)
+    usage_message = "USAGE: remove [wearable being worn]"
+    usage_error = wearable_string.empty? || wearable_string == "remove"
+
+    return puts usage_message if usage_error
+
+    to_remove = convert_to_remove(player, wearable_string)
+
+    not_wearing_error = "You're not wearing #{wearable_string}"
+
+    class_eval_remove(player, to_remove, not_wearing_error)
   end
 end
